@@ -5,7 +5,7 @@ using Host;
 using Host.Network;
 
 
-public class RiddleManager : MonoBehaviour
+public class RidleManager : MonoBehaviour
 {
 
     private HelpRPC _helpRPC;
@@ -15,6 +15,7 @@ public class RiddleManager : MonoBehaviour
         if (GlobalElements.Instance != null)
             _helpRPC = GlobalElements.Instance.HelpRPC;
 
+        this.CryptedMessage();
         InvokeRepeating("SendMonitoring", 10, 10);
     }
 
@@ -49,7 +50,7 @@ public class RiddleManager : MonoBehaviour
             pairs.Add(c, l);
             remainingLetters = remainingLetters.Replace(l.ToString(), string.Empty);
 
-            pairsString += c + "=" + l + ";";
+            pairsString += c + " = " + l + ";";
 
         }
 

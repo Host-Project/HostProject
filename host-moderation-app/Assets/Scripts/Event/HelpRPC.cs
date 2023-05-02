@@ -134,10 +134,6 @@ namespace Host.Network
         public void BreakerPanelOpen(bool state)
         {
             // Not used here
-            if(manager != null)
-            {
-                manager.CryptedMessage();
-            }
         }
 
         
@@ -152,11 +148,12 @@ namespace Host.Network
             // Not used here
         }
 
-        private RiddleManager manager;
+        private RidleManager manager;
 
-        public void TriggerMonitoringButton(RiddleManager manager, int id)
+        public void TriggerMonitoringButton(RidleManager manager, int id)
         {
-            this.manager = manager;
+            if(manager == null)
+                this.manager = manager;
             HostNetwork.RPC(HostNetworkId, "MonitoringButton", HostNetworkTarget.Others, id);
         }
 
