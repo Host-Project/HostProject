@@ -150,11 +150,11 @@ namespace Host.Network
 
         private RidleManager manager;
 
-        public void TriggerMonitoringButton(RidleManager manager, int id)
+        public void TriggerMonitoringButton(RidleManager manager, int id, bool success)
         {
             if(manager == null)
                 this.manager = manager;
-            HostNetwork.RPC(HostNetworkId, "MonitoringButton", HostNetworkTarget.Others, id);
+            HostNetwork.RPC(HostNetworkId, "MonitoringButton", HostNetworkTarget.Others, id, success);
         }
 
         public void MonitoringButton(int id)

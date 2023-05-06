@@ -82,25 +82,26 @@ public class RidleManager : MonoBehaviour
 
     int currentButton = -1;
 
+    private bool wasSuccess = false;
     public void SendMonitoring()
     {
-        if (currentButton != -1) Debug.Log("To slow");
+        if (currentButton != -1) wasSuccess = false;
         currentButton = UnityEngine.Random.Range(1, 4);
-        _helpRPC.TriggerMonitoringButton(this, currentButton);
+        _helpRPC.TriggerMonitoringButton(this, currentButton, wasSuccess);
     }
 
     public void ButtonClicked(int id)
     {
         if(currentButton == id)
         {
-            Debug.Log("Success");
+            wasSuccess = true;
         }
         else
         {
-            Debug.Log("Bad button");
+            wasSuccess = false;
         }
 
-        currentButton = -1;
+        //currentButton = -1;
     }
 
 

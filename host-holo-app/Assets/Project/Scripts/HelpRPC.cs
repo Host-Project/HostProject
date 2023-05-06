@@ -73,7 +73,8 @@ namespace HostProject.Network
 
         [Title("Ridle")]
         [SerializeField]
-        public CryptedMessageRidle cryptedMessage;
+        private CryptedMessageRidle cryptedMessage;
+        public MonitoringRidle monitoring;
 
         private void InitRpc()
         {
@@ -340,9 +341,19 @@ namespace HostProject.Network
 
         public void CryptedMessage(string message, string pairs)
         {
-            cryptedMessage.SetKeys(pairs);
+            cryptedMessage.SetCryptedMessage(message, pairs);
         }
 
+        public void MonitoringButton(int id, bool success)
+        {
+            Debug.Log("Id receveid : " + id);
+            monitoring.ActiveButton(id, success);
+        }
+
+        public void TriggerMonitoringButton(int id)
+        {
+            HostNetwork.RPC(HostNetworkId, "MonitoringButton", HostNetworkTarget.Server, id);
+        }
 
         private GameObject _currentArrow;
 

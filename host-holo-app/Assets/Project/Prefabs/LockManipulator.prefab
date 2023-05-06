@@ -426,6 +426,9 @@ MonoBehaviour:
   - {fileID: 1104457817607954881}
   - {fileID: 465149734287704382}
   Shackle: {fileID: 7919893979863334071}
+  OnUnlocked:
+    m_PersistentCalls:
+      m_Calls: []
 --- !u!1 &1793249163435681141
 GameObject:
   m_ObjectHideFlags: 0
