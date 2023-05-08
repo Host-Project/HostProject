@@ -1239,7 +1239,6 @@ GameObject:
   m_Component:
   - component: {fileID: 324060959}
   - component: {fileID: 324060958}
-  - component: {fileID: 324060957}
   m_Layer: 0
   m_Name: ScenarioManager
   m_TagString: Untagged
@@ -1247,18 +1246,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &324060957
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 324060956}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 201c975c494702747bae4b9ee589255c, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &324060958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3072,7 +3059,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: 0, y: 0}
+  m_AnchoredPosition: {x: 272.5, y: 0}
   m_SizeDelta: {x: 0, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &614521695
@@ -10331,7 +10318,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 837505480}
   m_Direction: 0
   m_Value: 1
-  m_Size: 0.99999994
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -11914,7 +11901,7 @@ PrefabInstance:
     - target: {fileID: 6534843013784296316, guid: 5e138416ca8994e9c96d60446be54584,
         type: 3}
       propertyPath: m_SizeDelta.x
-      value: 0
+      value: 364
       objectReference: {fileID: 0}
     - target: {fileID: 6534843013784296316, guid: 5e138416ca8994e9c96d60446be54584,
         type: 3}
@@ -11924,7 +11911,7 @@ PrefabInstance:
     - target: {fileID: 6534843013784296316, guid: 5e138416ca8994e9c96d60446be54584,
         type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 0
+      value: 200
       objectReference: {fileID: 0}
     - target: {fileID: 6534843013784296316, guid: 5e138416ca8994e9c96d60446be54584,
         type: 3}
@@ -12494,7 +12481,7 @@ RectTransform:
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 0, y: 0}
+  m_SizeDelta: {x: 880, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &6813866274438171250
 CanvasRenderer:

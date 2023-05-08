@@ -9,14 +9,17 @@ public class RidleManager : MonoBehaviour
 {
 
     private HelpRPC _helpRPC;
+
+
     // Start is called before the first frame update
     void Start()
     {
         if (GlobalElements.Instance != null)
             _helpRPC = GlobalElements.Instance.HelpRPC;
 
+        _helpRPC.SetRidleManager(this);
         this.CryptedMessage();
-        InvokeRepeating("SendMonitoring", 10, 10);
+        SendMonitoring();
     }
 
     // Update is called once per frame
@@ -81,28 +84,25 @@ public class RidleManager : MonoBehaviour
     }
 
     int currentButton = -1;
+    bool hasBeenPressed = false;
 
-    private bool wasSuccess = false;
     public void SendMonitoring()
     {
-        if (currentButton != -1) wasSuccess = false;
-        currentButton = UnityEngine.Random.Range(1, 4);
-        _helpRPC.TriggerMonitoringButton(this, currentButton, wasSuccess);
+        if (!hasBeenPressed) _helpRPC.TriggerMonitoringFeedback(false);
+
+        hasBeenPressed = false;
+        currentButton = Random.Range(1, 6);
+        _helpRPC.TriggerMonitoringActiveButton(currentButton);
+        Invoke("SendMonitoring", 10);
     }
 
     public void ButtonClicked(int id)
     {
-        if(currentButton == id)
-        {
-            wasSuccess = true;
-        }
-        else
-        {
-            wasSuccess = false;
-        }
-
-        //currentButton = -1;
+        hasBeenPressed = true;
+        _helpRPC.TriggerMonitoringFeedback(currentButton == id);
+        currentButton = -1;
     }
+
 
 
     

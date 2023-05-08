@@ -88,7 +88,9 @@ namespace HostProject.Network
             HostNetworkManager.RegisterRPC(HostNetworkId, 6, "SetSwitchState");
             HostNetworkManager.RegisterRPC(HostNetworkId, 7, "BreakerPanelOpen");
             HostNetworkManager.RegisterRPC(HostNetworkId, 8, "CryptedMessage");
-            HostNetworkManager.RegisterRPC(HostNetworkId, 9, "MonitoringButton");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 9, "MonitoringPressedButton");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 10, "MonitoringActiveButton");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 11, "MonitoringFeedback");
             _rpcInitDone = true;
         }
 
@@ -344,22 +346,27 @@ namespace HostProject.Network
             cryptedMessage.SetCryptedMessage(message, pairs);
         }
 
-        public void MonitoringButton(int id, bool success)
-        {
-            Debug.Log("Id receveid : " + id);
-            monitoring.ActiveButton(id, success);
-        }
-
-        public void TriggerMonitoringButton(int id)
-        {
-            HostNetwork.RPC(HostNetworkId, "MonitoringButton", HostNetworkTarget.Server, id);
-        }
-
+        
         private GameObject _currentArrow;
 
         public void HideArrow()
         {
             _currentArrow.SetActive(false);
+        }
+
+        public void TriggerMonitoringPressedButton(int id)
+        {
+            HostNetwork.RPC(HostNetworkId, "MonitoringPressedButton", HostNetworkTarget.Server, id);
+        }
+
+        public void MonitoringActiveButton(int id)
+        {
+            monitoring.ActiveButton(id);
+        }
+
+        public void MonitoringFeedback(bool success)
+        {
+            monitoring.IsSuccess(success);
         }
     }
 }

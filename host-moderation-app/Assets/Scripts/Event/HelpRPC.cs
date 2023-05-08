@@ -38,7 +38,9 @@ namespace Host.Network
             HostNetworkManager.RegisterRPC(HostNetworkId, 6, "SetSwitchState");
             HostNetworkManager.RegisterRPC(HostNetworkId, 7, "BreakerPanelOpen");
             HostNetworkManager.RegisterRPC(HostNetworkId, 8, "CryptedMessage");
-            HostNetworkManager.RegisterRPC(HostNetworkId, 9, "MonitoringButton");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 9, "MonitoringPressedButton");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 10, "MonitoringActiveButton");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 11, "MonitoringFeedback");
             _rpcInitDone = true;
         }
 
@@ -148,22 +150,28 @@ namespace Host.Network
             // Not used here
         }
 
-        private RidleManager manager;
-
-        public void TriggerMonitoringButton(RidleManager manager, int id, bool success)
-        {
-            if(manager == null)
-                this.manager = manager;
-            HostNetwork.RPC(HostNetworkId, "MonitoringButton", HostNetworkTarget.Others, id, success);
+        private RidleManager _ridleManager;
+        public void SetRidleManager(RidleManager manager) {
+            _ridleManager = manager;
         }
 
-        public void MonitoringButton(int id)
+
+        public void TriggerMonitoringActiveButton(int id)
         {
-            if(manager != null)
-            {
-                manager.ButtonClicked(id);
-            }
+            HostNetwork.RPC(HostNetworkId, "MonitoringActiveButton", HostNetworkTarget.Others, id);
         }
+
+        public void MonitoringPressedButton(int id)
+        {
+            _ridleManager.ButtonClicked(id);
+        }
+
+        public void TriggerMonitoringFeedback(bool success)
+        {
+            HostNetwork.RPC(HostNetworkId, "MonitoringFeedback", HostNetworkTarget.Others, success);
+        }
+       
+       
     }
 
 }
