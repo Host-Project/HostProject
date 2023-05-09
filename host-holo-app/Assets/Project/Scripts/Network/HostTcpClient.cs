@@ -115,8 +115,38 @@ namespace Host.Network
 
                             // Trigger event with incomming data
                             Debug.Log($"[HostTcpClient] Data received");
-                            HostNetworkMessage message = JsonConvert.DeserializeObject<HostNetworkMessage>(Encoding.UTF8.GetString(incomingData));
-                            MessageReceived?.Invoke(this, new HostNetworkMessageEvent(message));
+                            Debug.Log($"[HostTcpClient] Data : " + Encoding.UTF8.GetString(incomingData));
+                            string data = Encoding.UTF8.GetString(incomingData);
+                            // Workaround to fix problem when multiple message in buffer...
+                            
+                                try
+                                {
+                                HostNetworkMessage message = JsonConvert.DeserializeObject<HostNetworkMessage>(data);
+                                MessageReceived?.Invoke(this, new HostNetworkMessageEvent(message));
+
+                                }catch(JsonReaderException e)
+                                {
+                                string[] messages = data.Split(new string[] { "}{" }, StringSplitOptions.None);
+                                foreach(string message in messages)
+                                {
+                                    string tmp = message;
+                                    if (!message.StartsWith("{"))
+                                    {
+                                        tmp = "{" + message;
+                                    }
+
+                                    if (!message.EndsWith("}"))
+                                    {
+                                        tmp += "}";
+                                    }
+
+                                    HostNetworkMessage msg = JsonConvert.DeserializeObject<HostNetworkMessage>(tmp);
+                                    MessageReceived?.Invoke(this, new HostNetworkMessageEvent(msg));
+
+                                }
+                                }
+                            
+
                         }
                     }
                 }
