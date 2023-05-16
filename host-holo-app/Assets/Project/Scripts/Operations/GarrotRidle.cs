@@ -33,6 +33,7 @@ public class GarrotRidle : MonoBehaviour
 
     public void Done()
     {
-        transform.parent.gameObject.SetActive(false);
+        //transform.parent.gameObject.SetActive(false);
+        gameObject.SetActive(false);
     }
 }

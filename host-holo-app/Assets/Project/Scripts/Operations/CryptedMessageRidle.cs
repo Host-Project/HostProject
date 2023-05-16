@@ -16,8 +16,10 @@ public class CryptedMessageRidle : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI message;
 
-    private Vector3 inRoomPosition;
-    private Vector3 outOfRoomPosition;
+    [SerializeField]
+    private Transform inPosition;
+    [SerializeField]
+    private Transform outPosition;
 
     [SerializeField]
     private AudioSource doorSound;
@@ -51,9 +53,6 @@ public class CryptedMessageRidle : MonoBehaviour
     private void Start()
     {
         rotation = messageObject.transform.rotation;
-        outOfRoomPosition = messageObject.transform.localPosition;
-        inRoomPosition = outOfRoomPosition - new Vector3(0, 0, 2);
-        //GiveMessage();
         
     }
     private void Update()
@@ -61,15 +60,13 @@ public class CryptedMessageRidle : MonoBehaviour
         switch (direction)
         {
             case Direction.In:
-                if (messageObject.transform.localPosition.z > inRoomPosition.z)
-                    messageObject.transform.position += new Vector3(0, 0, 1 * Time.deltaTime);
-                else
+                messageObject.transform.localPosition = Vector3.MoveTowards(messageObject.transform.localPosition, inPosition.localPosition, 0.1f);
+                if (messageObject.transform.localPosition == inPosition.localPosition)
                     direction = Direction.None;
                 break;
             case Direction.Out:
-                if (messageObject.transform.localPosition.z < outOfRoomPosition.z)
-                    messageObject.transform.position -= new Vector3(0, 0, 1 * Time.deltaTime);
-                else
+                messageObject.transform.localPosition = Vector3.MoveTowards(messageObject.transform.localPosition, outPosition.localPosition, 0.1f);
+                if (messageObject.transform.localPosition == outPosition.localPosition)
                     direction = Direction.None;
                 break;
         }
@@ -78,7 +75,7 @@ public class CryptedMessageRidle : MonoBehaviour
     public void GiveMessage()
     {
         messageObject.GetComponent<NearInteractionGrabbable>().enabled = true;
-        messageObject.transform.localPosition = outOfRoomPosition;
+        messageObject.transform.localPosition = outPosition.localPosition;
         messageObject.transform.localRotation = rotation;
         direction = Direction.In;
         doorSound.Play();
@@ -89,7 +86,7 @@ public class CryptedMessageRidle : MonoBehaviour
         if (direction != Direction.None) return;
 
         messageObject.GetComponent<NearInteractionGrabbable>().enabled = false;
-        messageObject.transform.localPosition = inRoomPosition;
+        messageObject.transform.localPosition = inPosition.localPosition;
         messageObject.transform.localRotation = rotation;
         direction = Direction.Out;
         if(!CephalosporineCheck.activeInHierarchy || VanocomycineCheck.activeInHierarchy || AmoxicilineCheck.activeInHierarchy)
