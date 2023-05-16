@@ -35,11 +35,8 @@ namespace HostProject.Network
         private bool _isSendingLocalHideContentObject = false;
 
         [Title("Audio")]
-
         public AudioSource AudioSource;
-        public AudioClip AnnoucementBeep;
-        public AudioClip PlaneBreakdown;
-        public AudioClip CommandantAnnoucement;
+        public AudioClip AlarmeBombardement;
 
         [Title("Arrows")]
 
@@ -74,8 +71,14 @@ namespace HostProject.Network
         [Title("Ridle")]
         [SerializeField]
         private CryptedMessageRidle cryptedMessage;
-        public MonitoringRidle monitoring;
+        [SerializeField]
+        private MonitoringRidle monitoring;
+        [SerializeField]
+        private GarrotRidle garrot;
 
+        [Title("Event")]
+        [SerializeField]
+        private LightsDownEvent lightDown;
         private void InitRpc()
         {
             HostNetworkManager.RegisterGameObject(HostNetworkId, this);
@@ -91,6 +94,8 @@ namespace HostProject.Network
             HostNetworkManager.RegisterRPC(HostNetworkId, 9, "MonitoringPressedButton");
             HostNetworkManager.RegisterRPC(HostNetworkId, 10, "MonitoringActiveButton");
             HostNetworkManager.RegisterRPC(HostNetworkId, 11, "MonitoringFeedback");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 12, "GarrotDone");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 13, "CryptedMessageDone");
             _rpcInitDone = true;
         }
 
@@ -228,19 +233,13 @@ namespace HostProject.Network
             switch (actionNumber)
             {
                 case "1":
+                    lightDown.TriggerEvent();
                     break;
                 case "2":
-                    AudioSource.clip = CommandantAnnoucement;
+                    AudioSource.clip = AlarmeBombardement;
                     AudioSource.Play();
                     break;
-                case "3":
-                    AudioSource.clip = PlaneBreakdown;
-                    AudioSource.Play();
-                    break;
-                case "4":
-                    AudioSource.clip = AnnoucementBeep;
-                    AudioSource.Play();
-                    break;
+                
                 default:
                     break;
             }
@@ -367,6 +366,28 @@ namespace HostProject.Network
         public void MonitoringFeedback(bool success)
         {
             monitoring.IsSuccess(success);
+        }
+
+        public void TriggerGarrotDone()
+        {
+            HostNetwork.RPC(HostNetworkId, "GarrotDone", HostNetworkTarget.All);
+        }
+        
+
+        public void GarrotDone()
+        {
+            garrot.Done();
+            cryptedMessage.GiveMessage();
+        }
+
+        public void TriggerCryptedMessageDone()
+        {
+            HostNetwork.RPC(HostNetworkId, "CryptedMessageDone", HostNetworkTarget.All);
+        }
+
+        public void CryptedMessageDone()
+        {
+            cryptedMessage.Done();
         }
     }
 }

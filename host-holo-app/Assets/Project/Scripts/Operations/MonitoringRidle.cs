@@ -62,6 +62,10 @@ public class MonitoringRidle : MonoBehaviour
 
     public void ActiveButton(int id)
     {
+        if(lastId == -1)
+        {
+            this.gameObject.GetComponent<AudioSource>().Play();
+        }
         if(lastId != -1)
         {
             lights[lastId-1].gameObject.SetActive(false);

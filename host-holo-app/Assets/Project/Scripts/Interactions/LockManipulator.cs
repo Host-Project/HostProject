@@ -38,6 +38,7 @@ public class LockManipulator : MonoBehaviour
 
     public void PlayOpenAnimation()
     {
+        Debug.Log("Open");
         Sequence sequence = DOTween.Sequence();
         sequence.Append(Shackle.DOLocalMoveY(0.0036f, 0.5f));
         sequence.Append(Shackle.DOLocalRotate(new Vector3(0f, 170f, 0f), 1f));

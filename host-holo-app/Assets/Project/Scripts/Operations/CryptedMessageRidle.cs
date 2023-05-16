@@ -1,3 +1,4 @@
+using HostProject.Network;
 using Microsoft.MixedReality.Toolkit.Input;
 using System.Collections;
 using System.Collections.Generic;
@@ -15,9 +16,7 @@ public class CryptedMessageRidle : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI message;
 
-    [SerializeField]
     private Vector3 inRoomPosition;
-    [SerializeField]
     private Vector3 outOfRoomPosition;
 
     [SerializeField]
@@ -32,6 +31,9 @@ public class CryptedMessageRidle : MonoBehaviour
     [SerializeField]
     private GameObject AmoxicilineCheck;
 
+
+    [SerializeField]
+    private HelpRPC rpc;
     enum Direction { In, Out, None}
     private Direction direction = Direction.None;
 
@@ -49,7 +51,9 @@ public class CryptedMessageRidle : MonoBehaviour
     private void Start()
     {
         rotation = messageObject.transform.rotation;
-        GiveMessage();
+        outOfRoomPosition = messageObject.transform.localPosition;
+        inRoomPosition = outOfRoomPosition - new Vector3(0, 0, 2);
+        //GiveMessage();
         
     }
     private void Update()
@@ -92,9 +96,13 @@ public class CryptedMessageRidle : MonoBehaviour
             Invoke("GiveMessage", 5);
         else
         {
-            Debug.Log("Congratulation");
-            // Trigger next ridle
+            rpc.TriggerCryptedMessageDone();
         }
+    }
+
+    public void Done()
+    {
+        messageObject.SetActive(false);
     }
 
 }

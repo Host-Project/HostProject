@@ -63,11 +63,11 @@ namespace Host.DB
             // Create the two original scenarios if they don't exist
             if (GetScenarioByID(0) == null && GetScenarioByID(1) == null)
             {
-                Scenario sce1 = new Scenario("Scenario Avion");
-                sce1.AddVirtualEvent(new VirtualEvent(scenario: sce1.id, "1", recipient: "All", name: "Passager se lève"));
-                sce1.AddVirtualEvent(new VirtualEvent(scenario: sce1.id, "2", recipient: "All", name: "Commandant de bord crie"));
-                sce1.AddVirtualEvent(new VirtualEvent(scenario: sce1.id, "3", recipient: "All", name: "Bruit stressant"));
-                sce1.AddVirtualEvent(new VirtualEvent(scenario: sce1.id, "4", recipient: "All", name: "Annonce simple beep"));
+                Scenario sce1 = new Scenario("Scenario Operation");
+                sce1.AddVirtualEvent(new VirtualEvent(scenario: sce1.id, "1", recipient: "All", name: "Arrêt des lumières temporaires"));
+                sce1.AddVirtualEvent(new VirtualEvent(scenario: sce1.id, "2", recipient: "All", name: "Alarme bombardement"));
+                //sce1.AddVirtualEvent(new VirtualEvent(scenario: sce1.id, "3", recipient: "All", name: "Bruit stressant"));
+                //sce1.AddVirtualEvent(new VirtualEvent(scenario: sce1.id, "4", recipient: "All", name: "Annonce simple beep"));
 
                 sce1.AddMessageEvent(new MessageEvent(scenario: sce1.id, type: "Alert", content: "Le code est en rapport avec le soleil, pensez à fouiller le sac", recipient: "All"));
                 sce1.AddMessageEvent(new MessageEvent(scenario: sce1.id, type: "Alert", content: "Le modèle de l''avion est affiché quelque part", recipient: "All"));
@@ -78,7 +78,7 @@ namespace Host.DB
 
                 sce1.AddHelpEvent(new HelpEvent(scenario: sce1.id, action_number: "1", recipient: "All", name: "Indice flèche sac"));
 
-                Scenario sce2 = new Scenario("Scenario Désert");
+               /* Scenario sce2 = new Scenario("Scenario Désert");
                 sce2.AddVirtualEvent(new VirtualEvent(scenario: sce2.id, "1", recipient: "All", name: "Horse runs"));
                 sce2.AddVirtualEvent(new VirtualEvent(scenario: sce2.id, "2", recipient: "All", name: "Sand stormd"));
                 sce2.AddVirtualEvent(new VirtualEvent(scenario: sce2.id, "3", recipient: "All", name: "Bird fly over"));
@@ -88,10 +88,10 @@ namespace Host.DB
                 sce2.AddMessageEvent(new MessageEvent(scenario: sce2.id, type: "Alert", content: "Ask for help", recipient: "All"));
                 sce2.AddMessageEvent(new MessageEvent(scenario: sce2.id, type: "Alert", content: "Be less loud", recipient: "All"));
 
-                sce2.AddHelpEvent(new HelpEvent(scenario: sce2.id, action_number: "1", recipient: "All", name: "Hint sand"));
+                sce2.AddHelpEvent(new HelpEvent(scenario: sce2.id, action_number: "1", recipient: "All", name: "Hint sand"));*/
 
                 PutScenario(sce1);
-                PutScenario(sce2);
+                //PutScenario(sce2);
 
                 Debug.Log("[DB] - Added two predefined scenarios");
             }

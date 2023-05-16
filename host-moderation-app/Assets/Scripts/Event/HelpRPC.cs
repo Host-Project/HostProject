@@ -41,6 +41,8 @@ namespace Host.Network
             HostNetworkManager.RegisterRPC(HostNetworkId, 9, "MonitoringPressedButton");
             HostNetworkManager.RegisterRPC(HostNetworkId, 10, "MonitoringActiveButton");
             HostNetworkManager.RegisterRPC(HostNetworkId, 11, "MonitoringFeedback");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 12, "GarrotDone");
+            HostNetworkManager.RegisterRPC(HostNetworkId, 13, "CryptedMessageDone");
             _rpcInitDone = true;
         }
 
@@ -172,6 +174,15 @@ namespace Host.Network
         }
        
        
+        public void GarrotDone()
+        {
+            _ridleManager.CryptedMessage();
+        }
+
+        public void CryptedMessageDone()
+        {
+            _ridleManager.SendMonitoring();
+        }
     }
 
 }
