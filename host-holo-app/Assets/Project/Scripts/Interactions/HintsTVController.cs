@@ -18,6 +18,8 @@ public class HintsTVController : MonoBehaviour
 
     public AudioSource AnnoucementSound;
 
+    public Light projectLight;
+
     [Title("Icons")]
     public Sprite IconInfo;
     public Sprite IconWarning;
@@ -56,7 +58,8 @@ public class HintsTVController : MonoBehaviour
         HideImage();
     }
 
-    public void ShowImage(Sprite image, float duration = 50)
+
+    public void ShowImage(Sprite image, float duration = 25)
     {
         HelpImage.sprite = image;
 
@@ -65,6 +68,10 @@ public class HintsTVController : MonoBehaviour
         Background.SetActive(false);
 
         AnnoucementSound.Play();
+
+        projectLight.enabled = true;
+        CancelInvoke("StopProjector");
+
 
         // Cancel any existing invoke calls
         CancelInvoke("HideImage");
@@ -75,7 +82,8 @@ public class HintsTVController : MonoBehaviour
     public void HideImage()
     {
         HelpImageContainer.SetActive(false);
-        Background.SetActive(true);
+        projectLight.enabled = false;
+        //Background.SetActive(true);
     }
 
     /// <summary>
@@ -84,7 +92,7 @@ public class HintsTVController : MonoBehaviour
     /// <param name="icon">Which icon should be displayed</param>
     /// <param name="message">The message content</param>
     /// <param name="time">The duration of the message in seconds</param>
-    public void ShowMessage(IconType icon, string message, float duration = 50)
+    public void ShowMessage(IconType icon, string message, float duration = 25)
     {
         Message.text = message;
         Icon.sprite = GetIcon(icon);
@@ -94,7 +102,7 @@ public class HintsTVController : MonoBehaviour
         Background.SetActive(false);
 
         AnnoucementSound.Play();
-
+        projectLight.enabled = true;
         // Cancel any existing invoke calls
         CancelInvoke("HideMessage");
 
@@ -107,6 +115,7 @@ public class HintsTVController : MonoBehaviour
     public void HideMessage()
     {
         Hint.SetActive(false);
-        Background.SetActive(true);
+        //Background.SetActive(true);
+        projectLight.enabled = false;
     }
 }

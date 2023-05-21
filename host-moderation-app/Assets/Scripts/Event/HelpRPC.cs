@@ -140,7 +140,7 @@ namespace Host.Network
             // Not used here
         }
 
-        
+
 
         public void TriggerCryptedMessage(string message, string pairs)
         {
@@ -153,7 +153,8 @@ namespace Host.Network
         }
 
         private RidleManager _ridleManager;
-        public void SetRidleManager(RidleManager manager) {
+        public void SetRidleManager(RidleManager manager)
+        {
             _ridleManager = manager;
         }
 
@@ -172,16 +173,22 @@ namespace Host.Network
         {
             HostNetwork.RPC(HostNetworkId, "MonitoringFeedback", HostNetworkTarget.Others, success);
         }
-       
-       
+
+
         public void GarrotDone()
         {
             _ridleManager.CryptedMessage();
         }
 
+        private bool flag = true;
+
         public void CryptedMessageDone()
         {
-            _ridleManager.SendMonitoring();
+            if (flag)
+            {
+                _ridleManager.SendMonitoring();
+                flag = false;
+            }
         }
     }
 

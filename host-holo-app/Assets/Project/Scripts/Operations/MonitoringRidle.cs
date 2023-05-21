@@ -2,6 +2,8 @@ using HostProject.Network;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.Video;
 
 public class MonitoringRidle : MonoBehaviour
 {
@@ -19,7 +21,26 @@ public class MonitoringRidle : MonoBehaviour
     [SerializeField]
     private HelpRPC rpc;
 
+    [SerializeField]
+    private GameObject backgroundMonitoringHint;
+
+    [SerializeField]
+    private Image displayedImage;
+
+    [SerializeField]
+    private List<Sprite> arrows;
+
+    [SerializeField]
+    private Sprite periodicTable;
+
+    [SerializeField]
+    private GameObject heartrateMonitor;
+
     private int lastId = -1;
+
+    private bool showImage = false;
+    private float timeLeft = 0.0f;
+    private int imageIndex = 0;
 
     // Start is called before the first frame update
     void Start()
@@ -30,13 +51,49 @@ public class MonitoringRidle : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        timeLeft += Time.deltaTime;
+        if (showImage && timeLeft >= 1.0f)
+        {
+            int indexMax = counter / step > arrows.Count ? arrows.Count+1 : counter/step;
+            if (indexMax > imageIndex)
+            {
+                ShowImage(imageIndex);
+                imageIndex++;
+            }
+            else
+            {
+                HideImage();
+                showImage = false;
+                imageIndex = 0;
+            }
+            timeLeft = 0.0f;
+        }
     }
 
+    private void HideImage()
+    {
+        backgroundMonitoringHint.SetActive(false);
+        displayedImage.gameObject.SetActive(false);
+        heartrateMonitor.GetComponent<RawImage>().enabled = true;
+    }
+
+    private void ShowImage(int id)
+    {
+        backgroundMonitoringHint.SetActive(true);
+        displayedImage.sprite = id == arrows.Count ? periodicTable : arrows[id];
+        displayedImage.gameObject.SetActive(true);
+        heartrateMonitor.GetComponent<RawImage>().enabled = false;
+
+    }
     public void SendPushedButton(int id)
     {
         rpc.TriggerMonitoringPressedButton(id);
     }
+
+    private int counter = 0;
+
+    public int step;
+
 
     public void IsSuccess(bool success)
     {
@@ -50,11 +107,16 @@ public class MonitoringRidle : MonoBehaviour
 
         if (success)
         {
+                counter++;
+            showImage = true;
             this.success.gameObject.SetActive(true);
             StartCoroutine(StopLight(this.success, 2));
+            
         }
         else
         {
+            if (counter > 0)
+                counter--;
             this.error.gameObject.SetActive(true);
             StartCoroutine(StopLight(this.error, 2));
         }
@@ -62,14 +124,16 @@ public class MonitoringRidle : MonoBehaviour
 
     public void ActiveButton(int id)
     {
-        if(lastId == -1)
+        if (lastId == -1)
         {
-            this.gameObject.GetComponent<AudioSource>().Play();
+            heartrateMonitor.GetComponent<VideoPlayer>().Play();
+            heartrateMonitor.GetComponent<RawImage>().enabled = true;
         }
-        if(lastId != -1)
+
+        if (lastId != -1)
         {
-            lights[lastId-1].gameObject.SetActive(false);
-            lights[id-1].gameObject.SetActive(true);
+            lights[lastId - 1].gameObject.SetActive(false);
+            lights[id - 1].gameObject.SetActive(true);
         }
 
         lastId = id;

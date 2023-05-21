@@ -33,54 +33,76 @@ public class HelpSelection : MonoBehaviour
         }
 
         Enigmes = new List<string>();
-        Enigmes.Add("Dossier patiente");
-        Enigmes.Add("Cadenas directionnel");
-        Enigmes.Add("Cryptex");
-        Enigmes.Add("Sièges");
+        Enigmes.Add("Garrot");
+        Enigmes.Add("Message crypté");
+        Enigmes.Add("Monitoring");
+        Enigmes.Add("Seringues");
+        Enigmes.Add("Calcul mental - Tableau périodique élément");
 
         Helps = new List<List<HelpCommand>>();
 
-        var folder = new List<HelpCommand>();
-        folder.Add(new HelpCommand() { CommandName = "SendImage", Text = "Image du boarding pass", ActionIndex = 51});
-        folder.Add(new HelpCommand() { CommandName = "SendText", Text = "Attention aux couleurs", TextParameter = "Faites attention aux couleurs sur le boarding pass"});
-        folder.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèches lumières", ActionIndex = 52});
-        folder.Add(new HelpCommand() { CommandName = "SendImage", Text = "Décodage", ActionIndex = 53});
-        folder.Add(new HelpCommand() { CommandName = "SendText", Text = "Remettez les sièges dans l'ordre", TextParameter = "Remettez dans l'ordre les sièges"});
+        var garrot = new List<HelpCommand>();
 
-        Helps.Add(folder);
+        garrot.Add(new HelpCommand() { CommandName = "SendText", Text = "Code non sécurisé", TextParameter = "Le code n'est pas sécurisé." });
+        garrot.Add(new HelpCommand() { CommandName = "SendText", Text = "Numéro de la salle", TextParameter = "Le numéro de la salle a son importance" });
+        garrot.Add(new HelpCommand() { CommandName = "SendText", Text = "Garrot sur le patient", TextParameter = "Amener les bandages au patient !" });
+        
 
-        var directionnal = new List<HelpCommand>();
-        directionnal.Add(new HelpCommand() { CommandName = "SendImage", Text = "Image boussole", ActionIndex = 54 });
-        directionnal.Add(new HelpCommand() { CommandName = "SendText", Text = "Météo qui oriente", TextParameter = "C'est la météo qui nous oriente" });
-        directionnal.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèche écran", ActionIndex = 55 });
-        directionnal.Add(new HelpCommand() { CommandName = "SendText", Text = "Exemple météo", TextParameter = "Les pluies dans le NORD -> Direction = haut" });
-        directionnal.Add(new HelpCommand() { CommandName = "SendText", Text = "Réinitialiser le cadenas", TextParameter = "Appuyer deux fois sur l'anse pour réinitialiser le cadenas" });
+        Helps.Add(garrot);
 
-        Helps.Add(directionnal);
+        var cryptedMessage = new List<HelpCommand>();
+        cryptedMessage.Add(new HelpCommand() { CommandName = "SendText", Text = "Toquer à la porte", TextParameter = "Quelqu'un a toqué à la porte. Regardez dans les alentours." });
+        cryptedMessage.Add(new HelpCommand() { CommandName = "SendImage", Text = "Image tablette reçue", ActionIndex = 54 });
+        cryptedMessage.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèche tablette", ActionIndex = 55 });
+        cryptedMessage.Add(new HelpCommand() { CommandName = "SendImage", Text = "Exemple de déchiffrage", ActionIndex = 56 });
+        cryptedMessage.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèches sur toutes les clées", ActionIndex = 57 });
+
+        Helps.Add(cryptedMessage);
 
 
-        var cryptex = new List<HelpCommand>();
-        cryptex.Add(new HelpCommand() { CommandName = "SendText", Text = "Regarder message crypté", TextParameter = "Un message crypté est caché avec la pince kocher" });
-        cryptex.Add(new HelpCommand() { CommandName = "SendText", Text = "Message un mot", TextParameter = "Le message donne un seul mot" });
-        cryptex.Add(new HelpCommand() { CommandName = "SendText", Text = "Mot de 5 lettres", TextParameter = "On cherche un mot de 5 lettres" });
-        cryptex.Add(new HelpCommand() { CommandName = "SendText", Text = "Scouts dos des sièges", TextParameter = "Des scouts ont griffonés sur le dos des sièges" });
-        cryptex.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèches sièges", ActionIndex = 56 });
-        cryptex.Add(new HelpCommand() { CommandName = "SendImage", Text = "Exemple décodage", ActionIndex = 57 });
+        var monitoring = new List<HelpCommand>();
+        monitoring.Add(new HelpCommand() { CommandName = "SendText", Text = "Rester vers le patient", TextParameter = "Restez vers le patient pour s'assurer que celui-ci va bien." });
+        monitoring.Add(new HelpCommand() { CommandName = "SendText", Text = "Interagir avec le monitoring", TextParameter = "Intéragissez avec la machine de monitoring pour garantir l'état du patient." });
+        monitoring.Add(new HelpCommand() { CommandName = "SendText", Text = "Ne vous arrêtez pas", TextParameter = "Ne vous arrêtez pas d'interagir avec la machine." });
+        monitoring.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèches monitoring", ActionIndex = 58 });
 
-        Helps.Add(cryptex);
+        Helps.Add(monitoring);
 
-        var seats = new List<HelpCommand>();
-        seats.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèche panneau", ActionIndex = 58 });
-        seats.Add(new HelpCommand() { CommandName = "SendText", Text = "Alimenter le panneau", TextParameter = "Le panneau doit être alimenté" });
-        seats.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèche batterie", ActionIndex = 59 });
-        seats.Add(new HelpCommand() { CommandName = "SendImage", Text = "Image numéros sièges", ActionIndex = 60 });
-        seats.Add(new HelpCommand() { CommandName = "SendText", Text = "Couleurs des pieds", TextParameter = "Avez-vous remarqué la couleur des pieds des sièges ?" });
-        seats.Add(new HelpCommand() { CommandName = "SendText", Text = "Vert=ON, Rouge=OFF", TextParameter = "Vert=ON, Rouge=OFF" });
 
-        Helps.Add(seats);
+        var seringues = new List<HelpCommand>();
+        seringues.Add(new HelpCommand() { CommandName = "SendText", Text = "Attention aux seringues", TextParameter = "Inspectez bien les seringues sous tous les angles." });
+        seringues.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèche seringue", ActionIndex = 59 });
+        seringues.Add(new HelpCommand() { CommandName = "SendText", Text = "Texte des seringues", TextParameter = "Le texte sur les seringues forment un mot." });
 
+        Helps.Add(seringues);
+
+        var labyrinthes = new List<HelpCommand>();
+        labyrinthes.Add(new HelpCommand() { CommandName = "SendText", Text = "Labyrinthes pas là par hasard", TextParameter = "Les labyrinthes ne sont pas là par hasard." });
+        labyrinthes.Add(new HelpCommand() { CommandName = "SendText", Text = "Dessiner sur une feuille", TextParameter = "Utiliez les feuilles et stylo à disposition." });
+        labyrinthes.Add(new HelpCommand() { CommandName = "SendText", Text = "Dessiner la résolution du labyrinthe", TextParameter = "N'hésitez pas à dessiner la résolution du labyrinthe." });
+        labyrinthes.Add(new HelpCommand() { CommandName = "SendImage", Text = "Exemple de résolution", ActionIndex = 60 });
+
+        Helps.Add(labyrinthes);
+
+        var periodicTable = new List<HelpCommand>();
+        periodicTable.Add(new HelpCommand() { CommandName = "SendText", Text = "Calcul mental", TextParameter = "Un peu de calcul mental." });
+        periodicTable.Add(new HelpCommand() { CommandName = "SendText", Text = "Correspondance avec un chiffre", TextParameter = "Les éléments ont probablement une correspondance avec un nombre." });
+        periodicTable.Add(new HelpCommand() { CommandName = "SendText", Text = "Monitoring indice", TextParameter = "Peut être que la personne au monitoring a un indice..." });
+        periodicTable.Add(new HelpCommand() { CommandName = "SendImage", Text = "Tableau periodique", ActionIndex = 61 });
+
+        Helps.Add(periodicTable);
+
+        var numbersGrid = new List<HelpCommand>();
+        numbersGrid.Add(new HelpCommand() { CommandName = "SendText", Text = "Flèches utiles", TextParameter = "Cherchez des flèches dans la salle." });
+        numbersGrid.Add(new HelpCommand() { CommandName = "SendText", Text = "Point de départ", TextParameter = "Il faut démarrer sur le rond" });
+        numbersGrid.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Ou sont les flèches", ActionIndex=62 });
+        numbersGrid.Add(new HelpCommand() { CommandName = "SendImage", Text = "Suite de flèches", ActionIndex = 63 });
+
+        Helps.Add(numbersGrid);
 
         EnigmeDropdown.dropdownItems.Clear();
+
+
 
         foreach(var item in Enigmes)
         {
@@ -94,7 +116,7 @@ public class HelpSelection : MonoBehaviour
 
         HelpsDropdown.dropdownItems.Clear();
 
-        foreach (var item in folder)
+        foreach (var item in garrot)
         {
             HelpsDropdown.SetItemTitle(item.Text);
             HelpsDropdown.CreateNewItem();
@@ -166,8 +188,4 @@ public class HelpSelection : MonoBehaviour
         _helpRPC.SendEvent(m);
     }
 
-    public void GenerateCryptedMessage()
-    {
-        
-    }
 }
