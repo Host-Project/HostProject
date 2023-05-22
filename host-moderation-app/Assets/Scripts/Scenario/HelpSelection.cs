@@ -55,7 +55,7 @@ public class HelpSelection : MonoBehaviour
         cryptedMessage.Add(new HelpCommand() { CommandName = "SendImage", Text = "Image tablette reçue", ActionIndex = 54 });
         cryptedMessage.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèche tablette", ActionIndex = 55 });
         cryptedMessage.Add(new HelpCommand() { CommandName = "SendImage", Text = "Exemple de déchiffrage", ActionIndex = 56 });
-        cryptedMessage.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèches sur toutes les clées", ActionIndex = 57 });
+        cryptedMessage.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Lumière sur toutes les clées", ActionIndex = 57 });
 
         Helps.Add(cryptedMessage);
 
@@ -72,7 +72,7 @@ public class HelpSelection : MonoBehaviour
         var seringues = new List<HelpCommand>();
         seringues.Add(new HelpCommand() { CommandName = "SendText", Text = "Attention aux seringues", TextParameter = "Inspectez bien les seringues sous tous les angles." });
         seringues.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Flèche seringue", ActionIndex = 59 });
-        seringues.Add(new HelpCommand() { CommandName = "SendText", Text = "Texte des seringues", TextParameter = "Le texte sur les seringues forment un mot." });
+        seringues.Add(new HelpCommand() { CommandName = "SendText", Text = "Texte des seringues", TextParameter = "Le texte sur les seringues forme un mot." });
 
         Helps.Add(seringues);
 
@@ -95,8 +95,8 @@ public class HelpSelection : MonoBehaviour
         var numbersGrid = new List<HelpCommand>();
         numbersGrid.Add(new HelpCommand() { CommandName = "SendText", Text = "Flèches utiles", TextParameter = "Cherchez des flèches dans la salle." });
         numbersGrid.Add(new HelpCommand() { CommandName = "SendText", Text = "Point de départ", TextParameter = "Il faut démarrer sur le rond" });
-        numbersGrid.Add(new HelpCommand() { CommandName = "SendEvent", Text = "Ou sont les flèches", ActionIndex=62 });
-        numbersGrid.Add(new HelpCommand() { CommandName = "SendImage", Text = "Suite de flèches", ActionIndex = 63 });
+        numbersGrid.Add(new HelpCommand() { CommandName = "SendText", Text = "Flèche sur monitoring", TextParameter = "La résolution se trouve sur le monitoring." });
+        numbersGrid.Add(new HelpCommand() { CommandName = "SendImage", Text = "Séquence de flèches", ActionIndex = 62 });
 
         Helps.Add(numbersGrid);
 

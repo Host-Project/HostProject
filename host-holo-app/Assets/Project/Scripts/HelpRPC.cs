@@ -38,21 +38,20 @@ namespace HostProject.Network
         public AudioSource AudioSource;
         public AudioClip AlarmeBombardement;
 
-        [Title("Arrows")]
+        [Title("Hints Event")]
 
-        public GameObject LightArrow;
-        public GameObject MeteoScreenArrow;
-        public GameObject SeatsArrow;
-        public GameObject PannelArrow;
-        public GameObject BatteryArrow;
+        public GameObject TabletteArrow;
+        public List<GameObject> KeysHalos;
+        public GameObject MonitoringArrow;
+        public GameObject SeringueArrow;
 
         [Title("Image")]
 
-        public Sprite BoardingPass;
-        public Sprite DecodePass;
-        public Sprite Boussole;
-        public Sprite DecodeSeats;
-        public Sprite SeatsLetters;
+        public Sprite TabletteCryptedMessage;
+        public Sprite UncryptExample;
+        public Sprite LabyrintheResolution;
+        public Sprite PeriodicTable;
+        public Sprite ArrowsSequence;
 
         [Title("Switches")]
 
@@ -252,59 +251,61 @@ namespace HostProject.Network
             {
                 case "1":
                     break;
-                case "51": // image boarding pass
-                    HintsTV.ShowImage(BoardingPass);
-                    break;
-                case "52": // arrow lights
-                    LightArrow.SetActive(true);
-                    LightArrow.GetComponent<AudioSource>().Play();
-                    _currentArrow = LightArrow;
-                    CancelInvoke("HideArrow");
-                    Invoke("HideArrow", 10f);
-                    break;
-                case "53": // image decode lights
-                    HintsTV.ShowImage(DecodePass);
-                    break;
                 case "54": // image boussole
-                    HintsTV.ShowImage(Boussole);
+                    HintsTV.ShowImage(TabletteCryptedMessage);
                     break;
                 case "55": // arrow meteo screen
-                    MeteoScreenArrow.SetActive(true);
-                    MeteoScreenArrow.GetComponent<AudioSource>().Play();
-                    _currentArrow = MeteoScreenArrow;
+                    TabletteArrow.SetActive(true);
+                    TabletteArrow.GetComponent<AudioSource>().Play();
+                    _currentArrow = TabletteArrow;
                     CancelInvoke("HideArrow");
                     Invoke("HideArrow", 10f);
                     break;
                 case "56": // arrow seats
-                    SeatsArrow.SetActive(true);
-                    SeatsArrow.GetComponent<AudioSource>().Play();
-                    _currentArrow = SeatsArrow;
-                    CancelInvoke("HideArrow");
-                    Invoke("HideArrow", 10f);
+                    HintsTV.ShowImage(UncryptExample);
                     break;
                 case "57": // example decode seats
-                    HintsTV.ShowImage(DecodeSeats);
+                    KeysHalos.ForEach(delegate (GameObject obj)
+                    {
+                        obj.SetActive(true);
+                    });
+                    CancelInvoke("HideHalos");
+                    Invoke("HideHalos", 10f);
                     break;
                 case "58": // arrow pannel
-                    PannelArrow.SetActive(true);
-                    PannelArrow.GetComponent<AudioSource>().Play();
-                    _currentArrow = PannelArrow;
+                    MonitoringArrow.SetActive(true);
+                    MonitoringArrow.GetComponent<AudioSource>().Play();
+                    _currentArrow = MonitoringArrow;
                     CancelInvoke("HideArrow");
                     Invoke("HideArrow", 10f);
                     break;
                 case "59": // arrow battery
-                    BatteryArrow.SetActive(true);
-                    BatteryArrow.GetComponent<AudioSource>().Play();
-                    _currentArrow = BatteryArrow;
+                    SeringueArrow.SetActive(true);
+                    SeringueArrow.GetComponent<AudioSource>().Play();
+                    _currentArrow = SeringueArrow;
                     CancelInvoke("HideArrow");
                     Invoke("HideArrow", 10f);
                     break;
                 case "60": // image seats numbers
-                    HintsTV.ShowImage(SeatsLetters);
+                    HintsTV.ShowImage(LabyrintheResolution);
+                    break;
+                case "61":
+                    HintsTV.ShowImage(PeriodicTable);
+                    break;
+                case "62":
+                    HintsTV.ShowImage(ArrowsSequence);
                     break;
                 default:
                     break;
             }
+        }
+
+        private void HideHalos()
+        {
+            KeysHalos.ForEach(delegate (GameObject obj)
+            {
+                obj.SetActive(false);
+            });
         }
 
         public void TriggerSetSwitchState(int switchIndex, bool state)
