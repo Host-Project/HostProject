@@ -129,6 +129,9 @@ namespace Host.Network
                 HostRpc message = JsonConvert.DeserializeObject<HostRpc>(Encoding.UTF8.GetString(messageEvent.Message.Data));
                 message.ConvertInt64ToInt32Payload();
 
+                Debug.Log("Received id : " + message.ObjectId);
+                Debug.Log("Rpc id : " + message.RpcId);
+
                 MonoBehaviour targetObject = _registeredObjects[message.ObjectId].TargetObject;
                 string methodname = _registeredObjects[message.ObjectId].Rpc[message.RpcId];
 
