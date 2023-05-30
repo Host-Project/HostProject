@@ -117,17 +117,18 @@ namespace Host.Network
                             Debug.Log($"[HostTcpClient] Data received");
                             Debug.Log($"[HostTcpClient] Data : " + Encoding.UTF8.GetString(incomingData));
                             string data = Encoding.UTF8.GetString(incomingData);
+
                             // Workaround to fix problem when multiple message in buffer...
-                            
-                                try
-                                {
+                            try
+                            {
                                 HostNetworkMessage message = JsonConvert.DeserializeObject<HostNetworkMessage>(data);
                                 MessageReceived?.Invoke(this, new HostNetworkMessageEvent(message));
 
-                                }catch(JsonReaderException e)
-                                {
+                            }
+                            catch (JsonReaderException e)
+                            {
                                 string[] messages = data.Split(new string[] { "}{" }, StringSplitOptions.None);
-                                foreach(string message in messages)
+                                foreach (string message in messages)
                                 {
                                     string tmp = message;
                                     if (!message.StartsWith("{"))
@@ -144,8 +145,8 @@ namespace Host.Network
                                     MessageReceived?.Invoke(this, new HostNetworkMessageEvent(msg));
 
                                 }
-                                }
-                            
+                            }
+
 
                         }
                     }
@@ -158,7 +159,7 @@ namespace Host.Network
 
             // Sometimes the object is destroyed and StreamClosed doesn't exist anymore
             // This can happen because we are in another thread
-            if(StreamClosed != null)
+            if (StreamClosed != null)
             {
                 StreamClosed.Invoke(this, null);
             }

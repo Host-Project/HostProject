@@ -344,7 +344,7 @@ namespace HostProject.Network
         public void CryptedMessage(string message, string pairs)
         {
             cryptedMessage.SetCryptedMessage(message, pairs);
-            cryptedMessage.GiveMessage();
+            //
         }
 
         
@@ -379,6 +379,7 @@ namespace HostProject.Network
         public void GarrotDone()
         {
             garrot.Done();
+            cryptedMessage.GiveMessage();
         }
 
         public void TriggerCryptedMessageDone()

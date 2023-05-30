@@ -177,7 +177,7 @@ namespace Host.Network
 
         public void GarrotDone()
         {
-            _ridleManager.CryptedMessage();
+            
         }
 
         private bool flag = true;

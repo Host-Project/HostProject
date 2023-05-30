@@ -39,17 +39,8 @@ public class CryptedMessageRidle : MonoBehaviour
     enum Direction { In, Out, None}
     private Direction direction = Direction.None;
 
-    public void SetCryptedMessage(string message, string pairs)
-    {
-        this.message.GetComponentInChildren<TextMeshProUGUI>().text = message;
+    
 
-        string[] lst = pairs.Split(';');
-        for(int i = 0; i < lst.Length; ++i)
-        {
-            Debug.Log(lst[i]);
-            keys[i].text = lst[i];
-        }
-    }
     private void Start()
     {
         rotation = messageObject.transform.rotation;
@@ -69,6 +60,18 @@ public class CryptedMessageRidle : MonoBehaviour
                 if (messageObject.transform.localPosition == outPosition.localPosition)
                     direction = Direction.None;
                 break;
+        }
+    }
+
+    public void SetCryptedMessage(string message, string pairs)
+    {
+        this.message.GetComponentInChildren<TextMeshProUGUI>().text = message;
+
+        string[] lst = pairs.Split(';');
+        for (int i = 0; i < lst.Length; ++i)
+        {
+            Debug.Log(lst[i]);
+            keys[i].text = lst[i];
         }
     }
 

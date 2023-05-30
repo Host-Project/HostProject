@@ -18,6 +18,7 @@ public class RidleManager : MonoBehaviour
             _helpRPC = GlobalElements.Instance.HelpRPC;
 
         _helpRPC.SetRidleManager(this);
+        CryptedMessage();
     }
 
     // Update is called once per frame
