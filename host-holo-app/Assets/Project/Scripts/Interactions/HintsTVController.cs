@@ -16,9 +16,7 @@ public class HintsTVController : MonoBehaviour
     public GameObject HelpImageContainer;
     public Image HelpImage;
 
-    public AudioSource AnnoucementSound;
-
-    public Light projectLight;
+    public Projector projector;
 
     [Title("Icons")]
     public Sprite IconInfo;
@@ -67,9 +65,7 @@ public class HintsTVController : MonoBehaviour
         HelpImageContainer.SetActive(true);
         Background.SetActive(false);
 
-        AnnoucementSound.Play();
-
-        projectLight.enabled = true;
+        projector.StartProjecting();
         CancelInvoke("StopProjector");
 
 
@@ -82,7 +78,7 @@ public class HintsTVController : MonoBehaviour
     public void HideImage()
     {
         HelpImageContainer.SetActive(false);
-        projectLight.enabled = false;
+        projector.StopProjecting();
         //Background.SetActive(true);
     }
 
@@ -101,8 +97,7 @@ public class HintsTVController : MonoBehaviour
         Hint.SetActive(true);
         Background.SetActive(false);
 
-        AnnoucementSound.Play();
-        projectLight.enabled = true;
+        projector.StartProjecting();
         // Cancel any existing invoke calls
         CancelInvoke("HideMessage");
 
@@ -116,6 +111,6 @@ public class HintsTVController : MonoBehaviour
     {
         Hint.SetActive(false);
         //Background.SetActive(true);
-        projectLight.enabled = false;
+        projector.StopProjecting();
     }
 }

@@ -36,6 +36,8 @@ public class MonitoringRidle : MonoBehaviour
     [SerializeField]
     private GameObject heartrateMonitor;
 
+    public AudioSource monitorSound;
+
     private int lastId = -1;
 
     private bool showImage = false;
@@ -74,7 +76,6 @@ public class MonitoringRidle : MonoBehaviour
     {
         backgroundMonitoringHint.SetActive(false);
         displayedImage.gameObject.SetActive(false);
-        heartrateMonitor.GetComponent<RawImage>().enabled = true;
     }
 
     private void ShowImage(int id)
@@ -82,7 +83,7 @@ public class MonitoringRidle : MonoBehaviour
         backgroundMonitoringHint.SetActive(true);
         displayedImage.sprite = id == arrows.Count ? periodicTable : arrows[id];
         displayedImage.gameObject.SetActive(true);
-        heartrateMonitor.GetComponent<RawImage>().enabled = false;
+        
 
     }
     public void SendPushedButton(int id)
@@ -126,8 +127,10 @@ public class MonitoringRidle : MonoBehaviour
     {
         if (lastId == -1)
         {
-            heartrateMonitor.GetComponent<VideoPlayer>().Play();
-            heartrateMonitor.GetComponent<RawImage>().enabled = true;
+            //heartrateMonitor.GetComponent<VideoPlayer>().Play();
+            //heartrateMonitor.GetComponent<RawImage>().enabled = true;
+            heartrateMonitor.SetActive(false);
+            monitorSound.Play();
         }
 
         if (lastId != -1)

@@ -373,6 +373,7 @@ namespace HostProject.Network
         public void TriggerGarrotDone()
         {
             HostNetwork.RPC(HostNetworkId, "GarrotDone", HostNetworkTarget.All);
+            GarrotDone();
         }
         
 

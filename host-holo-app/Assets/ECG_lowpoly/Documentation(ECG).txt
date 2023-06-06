@@ -1,0 +1,52 @@
+	
+- - - - - - - - - - - - - - - - - - - - - ECG lowpoly(Mobile, AR, PC) - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - 
+
+This pack contains 3d low poly model of an ECG Machine, with animated screen.Pack comes with many color variation's.You can use this pack commercially and non-commercially.This model is extremely optmized for pc, mobile and AR games, screen is animated using material offset.No shadergraph is used.
+
+Technical Details:-
+		- Model(s) : ECG
+		- Vertex count : 326
+		- Tris count :  620
+		- Unwrapped : Yes
+		- Texture Variations : 3  (Dusty, Non-Dusty, Animated screen)
+		- Animations : 1 (Screen animation)
+		- Used Material(s) : Unity Standard Material
+		- Texture maps : Albedo/Base Color, Normal, Metalic Smoothness
+		- Texture Size : 2048(.png)
+		
+
+Features:-
+	- Animated screen
+	- Dusty non-dusty texture variations
+	- Seperatable body parts
+	- low poly
+	- Colliders, Rigidbodies attached
+	- Easy to use and modify
+	- PBR Textures
+	- Mobile, AR supported
+
+Folder details:-
+
+	Materials : Where the materials for the model located.
+	
+	Meshes : Contain FBX format of the 3d model.
+	
+	Textures : Contains Textures, that are in (.PNG) file format
+	
+	(Other folders - Prefabs, Scenes, Animations)
+
+
+
+How to use:-
+	
+	Simply drag and drop the prefab to your scene and use it.
+	(Prefab(s) located under 
+	Asset >  ECG_lowpoly > Prefabs).
+
+..................................................................................
+
+About Me : "SR Studios Kerala", Indie Game developer & 3D Artist from Alappuzha, Kerala, India
+
+Contact : srstudioskerala@gmail.com
+
+................Thank you for downloading this package................................
